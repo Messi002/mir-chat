@@ -6,6 +6,7 @@ import Login from './Pages/Login';
 import Chat from './Pages/Chat';
 import Home from './Pages/Home';
 import Error from './Pages/Error';
+import './index.css';
 
 
 
@@ -18,8 +19,8 @@ function App() {
 <Routes>
 <Route path='/sdfd' element={<Home/>}/>
 <Route path='/' element={<Register/>}/>
-<Route path='/register' element={<Login/>}/>
-<Route path='/register' element={<Chat/>}/>
+<Route path='/login' element={<Login/>}/>
+<Route path='/chats' element={<Chat/>}/>
 <Route path='*' element={<Error/>}/>
 
 </Routes>
