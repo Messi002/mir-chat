@@ -4,7 +4,9 @@ import { Link } from "react-router-dom";
 import Logo from "../Assets/removedbg.png";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
 import "../index.css";
+import { registerRoute } from "../Utils/APIRoutes";
 
 const FormContainer = styled.div`
   height: 100vh;
@@ -84,9 +86,16 @@ function Register() {
     password: "",
     confirmPassword: "",
   });
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    handleValidation();
+    if (handleValidation()) {
+      const { password, confirmPassword, username, email } = values;
+      const { data } = await axios.post(registerRoute, {
+        username,
+        email,
+        password,
+      });
+    }
   };
   const toastOptions = {
     position: "bottom-right",
@@ -116,7 +125,7 @@ function Register() {
         toastOptions
       );
       return false;
-    } else if (email==="") {
+    } else if (email === "") {
       toast.error("Email required.", toastOptions);
       return false;
     }
