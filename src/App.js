@@ -17,10 +17,9 @@ function App() {
    <>
   <BrowserRouter>
 <Routes>
-<Route path='/sdfd' element={<Home/>}/>
-<Route path='/' element={<Register/>}/>
+<Route path='/register' element={<Register/>}/>
 <Route path='/login' element={<Login/>}/>
-<Route path='/chats' element={<Chat/>}/>
+<Route path='/' element={<Chat/>}/>
 <Route path='*' element={<Error/>}/>
 
 </Routes>

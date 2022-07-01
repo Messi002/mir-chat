@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "../Assets/removedbg.png";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -80,6 +80,7 @@ const FormContainer = styled.div`
 `;
 
 function Register() {
+   const navigate = useNavigate();
   const [values, setValues] = useState({
     username: "",
     email: "",
@@ -89,12 +90,20 @@ function Register() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (handleValidation()) {
-      const { password, confirmPassword, username, email } = values;
+      const { password, username, email } = values;
       const { data } = await axios.post(registerRoute, {
         username,
         email,
         password,
       });
+      if(data.status === false){
+         toast.error(data.msg, toastOptions);
+      }
+      if(data.status === true){
+         localStorage.setItem('chat-app-user',JSON.stringify(data.user));
+
+      }
+      navigate('/');
     }
   };
   const toastOptions = {
